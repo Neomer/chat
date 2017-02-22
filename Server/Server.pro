@@ -1,6 +1,14 @@
 QT += core widgets network
 QT -= gui
 
+
+CONFIG(unix): {
+    LIBS += -L/usr/lib -lpq
+} else {
+    LIBS += $$PWD/pgre/libpq.lib
+}
+
+
 TARGET = Server
 CONFIG += console
 CONFIG -= app_bundle
@@ -12,7 +20,9 @@ SOURCES += main.cpp \
     core/CClient.cpp \
     core/CDebug.cpp \
     model/CRoom.cpp \
-    model/CRoomCollection.cpp
+    model/CRoomCollection.cpp \
+    core/CDatabase.cpp \
+    core/CSettings.cpp
 
 HEADERS += \
     core/CServer.h \
@@ -22,6 +32,8 @@ HEADERS += \
     core/CBus.h \
     core/Messages.h \
     model/CRoom.h \
-    model/CRoomCollection.h
+    model/CRoomCollection.h \
+    core/CDatabase.h \
+    core/CSettings.h
 
 INCLUDEPATH += $$PWD
